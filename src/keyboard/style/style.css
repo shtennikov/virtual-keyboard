@@ -1,3 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+* {
+  box-sizing: border-box;
+}
 
+.body {
+  background-color: #cec3e2;
+  font-size: 20px;
+  font-family: "Kanit", sans-serif;
+}
+
+.wrapper {
+  margin: auto;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.title {
+  color: #ECF9FF;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  width: 836px;
+  margin: auto;
+}
+
+.keyboard__row {
+  display: flex;
+  margin-bottom: 5px;
+  gap: 5px;
+  justify-content: center;
+}
+
+.text-area {
+  width: 836px;
+  height: 255px;
+  resize: none;
+  outline: none;
+  background: #ECF2FF;
+  font-size: 22px;
+}
+
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  height: 50px;
+  background: #B2A4FF;
+  color: #F9F5E7;
+  cursor: pointer;
+}
+
+.key.active,
+.key:hover {
+  border: 1px solid #9482fa;
+}
+
+.key.active,
+.key:active {
+  transform: scale(0.93);
+  box-shadow: 0px 0px 5px 3px rgba(143, 124, 250, 0.7960784314);
+}
+
+.hidden {
+  display: none;
+}
+
+.key[data-key-code=ControlLeft],
+.key[data-key-code=ControlRight] {
+  width: 60px;
+}
+
+.key[data-key-code=Tab] {
+  width: 65px;
+}
+
+.key[data-key-code=CapsLock] {
+  width: 95px;
+}
+
+.key[data-key-code=Backspace] {
+  width: 100px;
+}
+
+.key[data-key-code=ShiftRight] {
+  width: 115px;
+}
+
+.key[data-key-code=ShiftLeft] {
+  width: 110px;
+}
+
+.key[data-key-code=Backspace] {
+  width: 120px;
+}
+
+.key[data-key-code=Enter] {
+  width: 130px;
+}
+
+.key[data-key-code=Space] {
+  width: 375px;
+}
 
 /*# sourceMappingURL=style.css.map */

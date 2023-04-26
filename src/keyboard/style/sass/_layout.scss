@@ -1,0 +1,22 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  width: 836px;
+  margin: auto;
+}
+
+.keyboard__row {
+  display: flex;
+  margin-bottom: 5px;
+  gap: 5px;
+  justify-content: center;
+}
+
+.text-area {
+  width: 836px;
+  height: 255px;
+  resize: none;
+  outline: none;
+  background: #ECF2FF;
+  font-size: 22px;
+}

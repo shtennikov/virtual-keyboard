@@ -1,0 +1,53 @@
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  height: 50px;
+  background: #B2A4FF;
+  color: #F9F5E7;
+  cursor: pointer;
+}
+
+.key.active,
+.key:hover {
+  border: 1px solid #9482fa;
+}
+.key.active,
+.key:active {
+  transform: scale(0.93);
+  box-shadow: 0px 0px 5px 3px #8f7cfacb;
+}
+
+.hidden {
+  display: none;
+}
+
+.key[data-key-code="ControlLeft"],
+.key[data-key-code="ControlRight"] {
+  width: 60px;
+}
+.key[data-key-code="Tab"] {
+  width: 65px;
+}
+.key[data-key-code="CapsLock"] {
+  width: 95px;
+}
+.key[data-key-code="Backspace"] {
+  width: 100px;
+}
+.key[data-key-code="ShiftRight"]{
+  width: 115px;
+}
+.key[data-key-code="ShiftLeft"] {
+  width: 110px;
+}
+.key[data-key-code="Backspace"] {
+  width: 120px;
+}
+.key[data-key-code="Enter"] {
+  width: 130px;
+}
+.key[data-key-code="Space"] {
+  width: 375px;
+}
