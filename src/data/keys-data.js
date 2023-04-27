@@ -17,52 +17,52 @@ const keys = [
     },
     {
       id: 'Digit3',
-      en: { text: '3', textShift: '#', textCaps: '`' },
+      en: { text: '3', textShift: '#', textCaps: '3' },
       ru: { text: '3', textShift: '№', textCaps: '3' },
     },
     {
       id: 'Digit4',
-      en: { text: '4', textShift: '$', textCaps: '`' },
+      en: { text: '4', textShift: '$', textCaps: '4' },
       ru: { text: '4', textShift: ';', textCaps: '4' },
     },
     {
       id: 'Digit5',
-      en: { text: '5', textShift: '%', textCaps: '`' },
+      en: { text: '5', textShift: '%', textCaps: '5' },
       ru: { text: '5', textShift: '%', textCaps: '5' },
     },
     {
       id: 'Digit6',
-      en: { text: '6', textShift: '^', textCaps: '`' },
+      en: { text: '6', textShift: '^', textCaps: '6' },
       ru: { text: '6', textShift: ':', textCaps: '6' },
     },
     {
       id: 'Digit7',
-      en: { text: '7', textShift: '&', textCaps: '`' },
+      en: { text: '7', textShift: '&', textCaps: '7' },
       ru: { text: '7', textShift: '?', textCaps: '7' },
     },
     {
       id: 'Digit8',
-      en: { text: '8', textShift: '*', textCaps: '`' },
+      en: { text: '8', textShift: '*', textCaps: '8' },
       ru: { text: '8', textShift: '*', textCaps: '8' },
     },
     {
       id: 'Digit9',
-      en: { text: '9', textShift: '(', textCaps: '`' },
+      en: { text: '9', textShift: '(', textCaps: '9' },
       ru: { text: '9', textShift: '(', textCaps: '9' },
     },
     {
       id: 'Digit0',
-      en: { text: '0', textShift: ')', textCaps: '`' },
+      en: { text: '0', textShift: ')', textCaps: '0' },
       ru: { text: '0', textShift: ')', textCaps: '0' },
     },
     {
       id: 'Minus',
-      en: { text: '-', textShift: '_', textCaps: '`' },
+      en: { text: '-', textShift: '_', textCaps: '-' },
       ru: { text: '-', textShift: '_', textCaps: '-' },
     },
     {
       id: 'Equal',
-      en: { text: '=', textShift: '+', textCaps: '`' },
+      en: { text: '=', textShift: '+', textCaps: '=' },
       ru: { text: '=', textShift: '+', textCaps: '=' },
     },
     {
@@ -300,8 +300,8 @@ const keys = [
     },
     {
       id: 'Space',
-      en: { text: 'Space', textShift: 'Space', textCaps: 'Space' },
-      ru: { text: 'Space', textShift: 'Space', textCaps: 'Space' },
+      en: { text: ' ', textShift: ' ', textCaps: ' ' },
+      ru: { text: ' ', textShift: ' ', textCaps: ' ' },
     },
     {
       id: 'AltRight',
@@ -331,4 +331,12 @@ const keys = [
   ],
 ];
 
-export default keys;
+const keysMap = new Map();
+
+for (let row = 0; row < keys.length; row += 1) {
+  for (let key = 0; key < keys[row].length; key += 1) {
+    keysMap.set(keys[row][key].id, keys[row][key]);
+  }
+}
+
+export { keys, keysMap };
