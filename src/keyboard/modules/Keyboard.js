@@ -118,14 +118,18 @@ class Keyboard {
       event.preventDefault();
     }
     this.pressedKey = this.keys.find((key) => key.dataset.keyCode === event.code);
-    this.pressedKey.classList.add('active');
+    if (this.pressedKey) {
+      this.pressedKey.classList.add('active');
+    }
     this.langChangeHandlerPressDown(event);
     this.turnUpSymbolsPressDown(event);
   }
 
   pressUpHandler(event) {
     this.pressedKey = this.keys.find((key) => key.dataset.keyCode === event.code);
-    this.pressedKey.classList.remove('active');
+    if (this.pressedKey) {
+      this.pressedKey.classList.remove('active');
+    }
     this.langChangeHandlerPressUp(event);
     this.turnUpSymbolsPressUp(event);
   }
