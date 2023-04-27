@@ -88,6 +88,11 @@ class Keyboard {
       const { keyCode } = key.dataset;
       if (this.shiftPressed && !this.capsPressed) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShift;
+      } else if (this.capsPressed && !this.shiftPressed) {
+        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
+      } else if (this.shiftPressed && this.capsPressed) {
+        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShiftCaps
+          || keysMap.get(keyCode)[this.currentLanguage].textCaps;
       } else {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
       }
@@ -99,10 +104,10 @@ class Keyboard {
       const { keyCode } = key.dataset;
       if (this.capsPressed && !this.shiftPressed) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
+      } else if (!this.capsPressed && !this.shiftPressed) {
+        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
       } else if (this.shiftPressed && this.capsPressed) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShift;
-      } else {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
       }
     });
   }
