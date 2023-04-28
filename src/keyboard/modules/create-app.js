@@ -11,6 +11,7 @@ const TEXT_TITLE = 'RSS Virtual Keyboard';
 let title = null;
 let textArea = null;
 let keyboard = null;
+let keyboardBlock = null;
 
 export default function createApp() {
   const app = document.createElement('div');
@@ -28,10 +29,13 @@ export default function createApp() {
   textArea.classList.add(classesCSS.TEXT_AREA);
 
   keyboard = new Keyboard();
+  keyboardBlock = keyboard.createKeyboard();
 
-  app.append(title, textArea, keyboard.createKeyboard());
+  app.append(title, textArea, keyboardBlock);
   document.addEventListener('keydown', keyboard.pressDownHandler.bind(keyboard));
   document.addEventListener('keyup', keyboard.pressUpHandler.bind(keyboard));
+  document.addEventListener('mousedown', keyboard.clickHandler);
+  document.addEventListener('mouseup', keyboard.clickHandler);
 
   return app;
 }

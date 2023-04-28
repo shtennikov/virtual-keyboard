@@ -10,6 +10,7 @@ class Keyboard {
       KEYBOARD_ROW: 'keyboard__row',
     };
     this.pressedKey = null;
+    this.clickedKey = null;
     this.capsPressed = false;
     this.altPressed = false;
     this.shiftPressed = false;
@@ -132,6 +133,17 @@ class Keyboard {
     }
     this.langChangeHandlerPressUp(event);
     this.turnUpSymbolsPressUp(event);
+  }
+
+  clickHandler(event) {
+    if (event.type === 'mousedown') {
+      this.clickedKey = event.target;
+      if (this.clickedKey.closest('.key')) {
+        this.clickedKey.classList.add('active');
+      }
+    } else {
+      this.clickedKey.classList.remove('active');
+    }
   }
 }
 
