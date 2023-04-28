@@ -15,6 +15,7 @@ class Keyboard {
     this.altPressed = false;
     this.shiftPressed = false;
     this.currentLanguage = localStorage.getItem('language');
+    this.preventDefaultKeys = ['Tab', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight'];
   }
 
   createKeyboard() {
@@ -114,8 +115,7 @@ class Keyboard {
   }
 
   pressDownHandler(event) {
-    const preventDefaultKeys = ['Tab', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight'];
-    if (preventDefaultKeys.includes(event.code)) {
+    if (this.preventDefaultKeys.includes(event.code)) {
       event.preventDefault();
     }
     this.pressedKey = this.keys.find((key) => key.dataset.keyCode === event.code);
