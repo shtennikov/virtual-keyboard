@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Roboto:regular&display=swap);
 * {
   box-sizing: border-box;
 }
@@ -39,6 +40,7 @@
   resize: none;
   outline: none;
   background: #ECF2FF;
+  font-family: "Roboto", sans-serif;
   font-size: 22px;
 }
 
