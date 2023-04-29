@@ -23,14 +23,14 @@ export default function createApp() {
   textArea = document.createElement('textarea');
   textArea.classList.add(classesCSS.TEXT_AREA);
 
-  keyboard = new Keyboard();
+  keyboard = new Keyboard(textArea);
   keyboardBlock = keyboard.createKeyboard();
 
   app.append(title, textArea, keyboardBlock);
   document.addEventListener('keydown', keyboard.pressDownHandler.bind(keyboard));
   document.addEventListener('keyup', keyboard.pressUpHandler.bind(keyboard));
-  document.addEventListener('mousedown', keyboard.clickHandler);
-  document.addEventListener('mouseup', keyboard.clickHandler);
+  document.addEventListener('mousedown', keyboard.clickDownHandler.bind(keyboard));
+  document.addEventListener('mouseup', keyboard.clickUpHandler.bind(keyboard));
 
   return app;
 }

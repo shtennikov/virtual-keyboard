@@ -1,5 +1,9 @@
 import {
-  keys, keysMap, serviceKeys, classesCSS, preventDefaultKeys,
+  keys,
+  keysMap,
+  serviceKeys,
+  classesCSS,
+  preventDefaultKeys,
   notPreventDefaultKeysInTextArea,
 } from '../../data/keys-data';
 import Key from './Key';
@@ -35,6 +39,17 @@ class Keyboard {
       }
       keyboard.append(newRow);
     }
+
+    document.addEventListener('keydown', (event) => {
+      this.textArea.focus();
+      if (!notPreventDefaultKeysInTextArea.includes(event.code)) {
+        event.preventDefault();
+      }
+    });
+    keyboard.addEventListener('click', () => {
+      this.textArea.focus();
+    });
+
     return keyboard;
   }
 
@@ -125,13 +140,120 @@ class Keyboard {
     });
   }
 
+  handleBackspaseState() {
+    let posStart = this.textArea.selectionStart;
+    const posEnd = this.textArea.selectionEnd;
+    const textAreaValue = this.textArea.value;
+
+    if (this.textArea.selectionStart !== this.textArea.selectionEnd) {
+      this.textArea.value = textAreaValue.slice(0, posStart) + textAreaValue.slice(posEnd);
+      this.textArea.setSelectionRange(posStart, posStart);
+    } else {
+      posStart = this.textArea.selectionStart;
+      if (posStart > 0) {
+        this.textArea.value = textAreaValue.slice(0, posStart - 1) + textAreaValue.slice(posStart);
+        this.textArea.setSelectionRange(posStart - 1, posStart - 1);
+      }
+    }
+  }
+
+  handleDeleteState() {
+    let posStart = this.textArea.selectionStart;
+    const posEnd = this.textArea.selectionEnd;
+    const textAreaValue = this.textArea.value;
+
+    if (this.textArea.selectionStart !== this.textArea.selectionEnd) {
+      this.textArea.value = textAreaValue.slice(0, posStart) + textAreaValue.slice(posEnd);
+      this.textArea.setSelectionRange(posStart, posStart);
+    } else {
+      posStart = this.textArea.selectionStart;
+      if (posStart > 0) {
+        this.textArea.value = textAreaValue.slice(0, posStart) + textAreaValue.slice(posStart + 1);
+        this.textArea.setSelectionRange(posStart, posStart);
+      }
+    }
+  }
+
+  handleClickOnArrows(event) {
+    const textarea = this.textArea;
+    const currentPos = textarea.selectionStart;
+    const currentLine = textarea.value.substr(0, currentPos).split('\n').length - 1;
+    const linesToMove = 1;
+    if (event.target.closest('.key[data-key-code="ArrowLeft"]')) {
+      this.textArea.selectionStart -= 1;
+      this.textArea.selectionEnd -= 1;
+    }
+    if (event.target.closest('.key[data-key-code="ArrowRight"]')) {
+      this.textArea.selectionStart += 1;
+    }
+    if (event.target.closest('.key[data-key-code="ArrowUp"]')) {
+      const newPosition = textarea.value
+        .split('\n')
+        .slice(0, currentLine - linesToMove + 1)
+        .join('\n').length;
+      this.textArea.setSelectionRange(newPosition, newPosition);
+    }
+    if (event.target.closest('.key[data-key-code="ArrowDown"]')) {
+      const newPosition = textarea.value
+        .split('\n')
+        .slice(0, currentLine + linesToMove + 1)
+        .join('\n').length;
+      this.textArea.setSelectionRange(newPosition, newPosition);
+    }
+  }
+
+  putInTextArea(symbol) {
+    const startPos = this.textArea.selectionStart;
+    const endPos = this.textArea.selectionEnd;
+
+    this.textArea.value = `${this.textArea.value.slice(0, startPos)}${symbol}${this.textArea.value.slice(endPos)}`;
+    this.textArea.setSelectionRange(startPos + symbol.length, startPos + symbol.length);
+  }
+
+  typeTextToTextArea(key) {
+    const posStart = this.textArea.selectionStart;
+    const textAreaValue = this.textArea.value;
+
+    switch (key.dataset.keyCode) {
+      case 'Backspace':
+        this.handleBackspaseState();
+        break;
+      case 'Delete':
+        this.handleDeleteState();
+        break;
+      case 'Tab':
+        this.putInTextArea('\t');
+        break;
+      case 'Enter':
+        this.putInTextArea('\n');
+        break;
+      case 'Space':
+        this.putInTextArea(' ');
+        break;
+      default:
+        if (serviceKeys.includes(key.dataset.keyCode)) {
+          this.textArea.value += '';
+        } else {
+          this.textArea.value = textAreaValue.slice(0, posStart)
+            + key.textContent
+            + this.textArea.value.slice(posStart);
+          this.textArea.setSelectionRange(posStart + 1, posStart + 1);
+        }
+        break;
+    }
+  }
+
   pressDownHandler(event) {
-    if (this.preventDefaultKeys.includes(event.code)) {
-      event.preventDefault();
+    if (event.code === 'Escape') {
+      return;
     }
     this.pressedKey = this.keys.find((key) => key.dataset.keyCode === event.code);
     if (this.pressedKey) {
+      if (preventDefaultKeys.includes(event.code)) {
+        event.preventDefault();
+      }
       this.pressedKey.classList.add('active');
+      this.typeTextToTextArea(this.pressedKey);
     }
     this.langChangeHandlerPressDown(event);
     this.turnUpSymbolsPressDown(event);
@@ -152,6 +274,7 @@ class Keyboard {
       this.clickedKey.classList.add('active');
       this.typeTextToTextArea(this.clickedKey.closest('.key'));
       this.turnUpSymbolsPressDown(event);
+      this.handleClickOnArrows(event);
     }
   }
 
