@@ -135,15 +135,16 @@ class Keyboard {
     this.turnUpSymbolsPressUp(event);
   }
 
-  clickHandler(event) {
-    if (event.type === 'mousedown') {
-      this.clickedKey = event.target;
-      if (this.clickedKey.closest('.key')) {
-        this.clickedKey.classList.add('active');
-      }
-    } else {
-      this.clickedKey.classList.remove('active');
+  clickDownHandler(event) {
+    this.clickedKey = event.target;
+    if (this.clickedKey.closest('.key')) {
+      this.clickedKey.classList.add('active');
+      this.typeTextToTextArea(this.clickedKey.closest('.key'));
     }
+  }
+
+  clickUpHandler() {
+    this.clickedKey.classList.remove('active');
   }
 }
 
