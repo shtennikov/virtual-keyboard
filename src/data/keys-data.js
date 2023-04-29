@@ -623,6 +623,14 @@ const classesCSS = {
   APP_CONTAINER: 'wrapper',
   TITLE: 'title',
   TEXT_AREA: 'text-area',
+  IMAGE: 'img',
+  IMAGE_CAT: 'img_cat',
+  IMAGE_CAT_LEFT: 'img_cat_left',
+  IMAGE_CAT_RIGHT: 'img_cat_right',
+  IMAGE_SPAN_TEXT_LEFT: 'text_left',
+  IMAGE_SPAN_TEXT_RIGHT: 'text_right',
+  IMAGE_SPAN_TEXT_TOP: 'text_top',
+  IMAGE_SPAN_TEXT_BOTTOM: 'text_bottom',
 };
 
 const keysMap = new Map();

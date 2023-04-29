@@ -2,14 +2,16 @@
   box-sizing: border-box;
 }
 .body {
-  background-color: #cec3e2;
+  background-color: #DCDCDC;
   font-size: 20px;
   font-family: 'Kanit', sans-serif;
 }
 .wrapper {
+  position: relative;
   margin: auto;
   max-width: 1100px;
   text-align: center;
+  z-index: 1;
 }
 .title {
   color: #ECF9FF;

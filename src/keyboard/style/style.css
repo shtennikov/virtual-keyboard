@@ -1,19 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 @import url(https://fonts.googleapis.com/css?family=Roboto:regular&display=swap);
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap");
 * {
   box-sizing: border-box;
 }
 
 .body {
-  background-color: #cec3e2;
+  background-color: #DCDCDC;
   font-size: 20px;
   font-family: "Kanit", sans-serif;
 }
 
 .wrapper {
+  position: relative;
   margin: auto;
   max-width: 1100px;
   text-align: center;
+  z-index: 1;
 }
 
 .title {
@@ -39,9 +42,78 @@
   height: 255px;
   resize: none;
   outline: none;
-  background: #ECF2FF;
+  background: #ecf2ff;
   font-family: "Roboto", sans-serif;
   font-size: 22px;
+}
+
+.img_cat {
+  position: absolute;
+  width: 200px;
+  z-index: -1;
+}
+
+.img_cat_right {
+  right: -65px;
+  top: 280px;
+}
+
+.img_cat_left {
+  left: -65px;
+  top: 280px;
+  transform: scale(-1, 1);
+}
+
+@keyframes text-animation {
+  0% {
+    font-size: 30px;
+  }
+  50% {
+    font-size: 40px;
+  }
+  100% {
+    font-size: 30px;
+  }
+}
+.text_top,
+.text_bottom {
+  position: absolute;
+  z-index: -1;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-size: 30px;
+  animation: text-animation 0.2s infinite;
+}
+
+.text_top {
+  top: 225px;
+}
+.text_top.text_left {
+  left: -50px;
+  transform: rotate(-15deg);
+}
+.text_top.text_right {
+  right: -50px;
+  transform: rotate(15deg);
+}
+
+.text_bottom {
+  bottom: 135px;
+}
+.text_bottom.text_left {
+  left: 30px;
+  transform: rotate(-10deg);
+}
+.text_bottom.text_right {
+  right: 30px;
+  transform: rotate(10deg);
+}
+
+.text_left {
+  left: 0;
+}
+
+.text_right {
+  right: 0;
 }
 
 .key {
