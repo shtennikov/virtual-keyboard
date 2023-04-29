@@ -68,7 +68,7 @@ class Keyboard {
   }
 
   turnUpSymbolsPressDown(event) {
-    if (event.code === 'ShiftLeft') {
+    if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
       this.shiftPressed = true;
       this.handleShiftState();
     }
@@ -79,7 +79,7 @@ class Keyboard {
   }
 
   turnUpSymbolsPressUp(event) {
-    if (event.code === 'ShiftLeft') {
+    if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
       this.shiftPressed = false;
       this.handleShiftState();
     }
