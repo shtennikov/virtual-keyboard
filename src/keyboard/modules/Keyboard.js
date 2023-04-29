@@ -68,18 +68,30 @@ class Keyboard {
   }
 
   turnUpSymbolsPressDown(event) {
-    if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    if (
+      event.code === 'ShiftLeft'
+      || event.code === 'ShiftRight'
+      || event.target.closest('.key[data-key-code="ShiftLeft"]')
+      || event.target.closest('.key[data-key-code="ShiftRight"]')
+    ) {
       this.shiftPressed = true;
       this.handleShiftState();
     }
-    if (event.code === 'CapsLock') {
+    if (
+      event.code === 'CapsLock'
+      || event.target.closest('.key[data-key-code="CapsLock"]')
+    ) {
       this.capsPressed = !this.capsPressed;
       this.handleCapsState();
     }
   }
 
   turnUpSymbolsPressUp(event) {
-    if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    if (
+      event.code === 'ShiftLeft'
+      || event.code === 'ShiftRight'
+      || event.target.closest('.key')
+    ) {
       this.shiftPressed = false;
       this.handleShiftState();
     }
@@ -140,11 +152,13 @@ class Keyboard {
     if (this.clickedKey.closest('.key')) {
       this.clickedKey.classList.add('active');
       this.typeTextToTextArea(this.clickedKey.closest('.key'));
+      this.turnUpSymbolsPressDown(event);
     }
   }
 
-  clickUpHandler() {
+  clickUpHandler(event) {
     this.clickedKey.classList.remove('active');
+    this.turnUpSymbolsPressUp(event);
   }
 }
 
