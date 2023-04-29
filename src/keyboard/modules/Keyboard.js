@@ -8,8 +8,6 @@ import Key from './Key';
 class Keyboard {
   constructor(textArea) {
     this.textArea = textArea;
-    this.selectionposStartition = 0;
-    this.isTextAreaFocused = false;
     this.keys = [];
     this.pressedKey = null;
     this.clickedKey = null;
