@@ -1,34 +1,35 @@
-import { keys, keysMap } from '../../data/keys-data';
+import {
+  keys, keysMap, serviceKeys, classesCSS, preventDefaultKeys,
+  notPreventDefaultKeysInTextArea,
+} from '../../data/keys-data';
 import Key from './Key';
 
 /* eslint-disable no-param-reassign */
 class Keyboard {
-  constructor() {
+  constructor(textArea) {
+    this.textArea = textArea;
+    this.selectionposStartition = 0;
+    this.isTextAreaFocused = false;
     this.keys = [];
-    this.classesCSS = {
-      KEYS_KEYBOARD: 'keyboard',
-      KEYBOARD_ROW: 'keyboard__row',
-    };
     this.pressedKey = null;
     this.clickedKey = null;
     this.capsPressed = false;
     this.altPressed = false;
     this.shiftPressed = false;
     this.currentLanguage = localStorage.getItem('language');
-    this.preventDefaultKeys = ['Tab', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight'];
   }
 
   createKeyboard() {
     const currentLanguage = localStorage.getItem('language');
     const keyboard = document.createElement('div');
-    keyboard.classList.add(this.classesCSS.KEYS_KEYBOARD);
+    keyboard.classList.add(classesCSS.KEYS_KEYBOARD);
 
     let newRow = null;
     let newKey = null;
 
     for (let row = 0; row < keys.length; row += 1) {
       newRow = document.createElement('div');
-      newRow.classList.add(this.classesCSS.KEYBOARD_ROW);
+      newRow.classList.add(classesCSS.KEYBOARD_ROW);
       for (let key = 0; key < keys[row].length; key += 1) {
         newKey = new Key(keys[row][key]).createKey(currentLanguage);
         this.keys.push(newKey);

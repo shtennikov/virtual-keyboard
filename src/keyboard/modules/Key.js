@@ -1,16 +1,15 @@
+import { classesCSS } from '../../data/keys-data';
+
 export default class Key {
   constructor(key) {
     this.id = key.id;
     this.en = key.en;
     this.ru = key.ru;
-    this.classesCSS = {
-      KEY: 'key',
-    };
   }
 
   createKey(currentLanguage) {
     const key = document.createElement('div');
-    key.classList.add(this.classesCSS.KEY);
+    key.classList.add(classesCSS.KEY);
     key.dataset.keyCode = this.id;
 
     const keyContent = document.createElement('span');

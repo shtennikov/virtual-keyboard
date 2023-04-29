@@ -1,10 +1,5 @@
 import Keyboard from './Keyboard';
-
-const classesCSS = {
-  APP_CONTAINER: 'wrapper',
-  TITLE: 'title',
-  TEXT_AREA: 'text-area',
-};
+import { classesCSS } from '../../data/keys-data';
 
 const TEXT_TITLE = 'RSS Virtual Keyboard';
 

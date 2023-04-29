@@ -587,6 +587,44 @@ const keys = [
   ],
 ];
 
+const serviceKeys = [
+  'Tab',
+  'CapsLock',
+  'ShiftLeft',
+  'ControlLeft',
+  'MetaLeft',
+  'AltLeft',
+  'Space',
+  'AltRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowDown',
+  'ArrowUp',
+  'ControlRight',
+  'ShiftRight',
+  'Enter',
+  'Delete',
+  'Backspace',
+];
+const preventDefaultKeys = ['Tab', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight'];
+
+const notPreventDefaultKeysInTextArea = [
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowDown',
+  'ArrowUp',
+  'Delete',
+];
+
+const classesCSS = {
+  KEY: 'key',
+  KEYS_KEYBOARD: 'keyboard',
+  KEYBOARD_ROW: 'keyboard__row',
+  APP_CONTAINER: 'wrapper',
+  TITLE: 'title',
+  TEXT_AREA: 'text-area',
+};
+
 const keysMap = new Map();
 
 for (let row = 0; row < keys.length; row += 1) {
@@ -595,4 +633,7 @@ for (let row = 0; row < keys.length; row += 1) {
   }
 }
 
-export { keys, keysMap };
+export {
+  keys, keysMap, serviceKeys, classesCSS, preventDefaultKeys,
+  notPreventDefaultKeysInTextArea,
+};
