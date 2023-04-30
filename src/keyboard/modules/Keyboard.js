@@ -299,8 +299,10 @@ class Keyboard {
   }
 
   clickUpHandler(event) {
-    this.clickedKey.classList.remove('active');
-    this.changeCaseOfSymbolsKeysUp(event);
+    if (this.clickedKey) {
+      this.clickedKey.classList.remove('active');
+      this.changeCaseOfSymbolsKeysUp(event);
+    }
   }
 }
 
