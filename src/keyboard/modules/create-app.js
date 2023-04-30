@@ -3,12 +3,15 @@ import createImages from './create-images';
 import { classesCSS } from '../../data/keys-data';
 
 const TEXT_TITLE = 'RSS Virtual Keyboard';
+const TEXT_DESCRIPTION = 'Клавиатура создана в операционной системе Windows';
+const TEXT_CHANGE_LANGUAGE = 'Для переключения языка используйте комбинацию левый Shift + левый Alt';
 
 let title = null;
 let images = null;
 let textArea = null;
 let keyboard = null;
 let keyboardBlock = null;
+let description = null;
 
 export default function createApp() {
   const app = document.createElement('div');
@@ -30,7 +33,10 @@ export default function createApp() {
   keyboard = new Keyboard(textArea);
   keyboardBlock = keyboard.createKeyboard();
 
-  app.append(title, images, textArea, keyboardBlock);
+  description = document.createElement('span');
+  description.insertAdjacentHTML('afterbegin', `${TEXT_DESCRIPTION}<br>${TEXT_CHANGE_LANGUAGE}`);
+
+  app.append(title, images, textArea, keyboardBlock, description);
   document.addEventListener('keydown', keyboard.pressDownHandler.bind(keyboard));
   document.addEventListener('keyup', keyboard.pressUpHandler.bind(keyboard));
   document.addEventListener('mousedown', keyboard.clickDownHandler.bind(keyboard));
