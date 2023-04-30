@@ -107,7 +107,8 @@ class Keyboard {
     if (
       event.code === 'ShiftLeft'
       || event.code === 'ShiftRight'
-      || event.target.closest('.key')
+      || event.target.closest('.key[data-key-code="ShiftLeft"]')
+      || event.target.closest('.key[data-key-code="ShiftRight"]')
     ) {
       this.shiftPressed = false;
       this.handleShiftState();
