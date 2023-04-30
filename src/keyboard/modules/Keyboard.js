@@ -263,6 +263,10 @@ class Keyboard {
     if (event.code === 'Escape') {
       return;
     }
+    if (event.key === 'AltGraph') {
+      const ctrlLeft = this.keys.find((key) => key.dataset.keyCode === 'ControlLeft');
+      ctrlLeft.classList.remove('active');
+    }
     this.pressedKey = this.keys.find((key) => key.dataset.keyCode === event.code);
     if (this.pressedKey) {
       if (preventDefaultKeys.includes(event.code)) {
