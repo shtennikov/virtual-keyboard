@@ -16,6 +16,7 @@ class Keyboard {
     this.pressedKey = null;
     this.clickedKey = null;
     this.capsPressed = false;
+    this.capsLocked = false;
     this.altPressed = false;
     this.shiftPressed = false;
     this.currentLanguage = localStorage.getItem('language');
@@ -95,8 +96,11 @@ class Keyboard {
       event.code === 'CapsLock'
       || event.target.closest('.key[data-key-code="CapsLock"]')
     ) {
-      this.capsPressed = !this.capsPressed;
-      this.handleCapsState();
+      if (!this.capsPressed) {
+        this.capsLocked = !this.capsLocked;
+        this.capsPressed = true;
+        this.handleCapsState();
+      }
     }
   }
 
@@ -109,16 +113,21 @@ class Keyboard {
       this.shiftPressed = false;
       this.handleShiftState();
     }
+    if (
+      event.code === 'CapsLock'
+      || event.target.closest('.key[data-key-code="CapsLock"]')) {
+      this.capsPressed = false;
+    }
   }
 
   handleShiftState() {
     this.keys.forEach((key) => {
       const { keyCode } = key.dataset;
-      if (this.shiftPressed && !this.capsPressed) {
+      if (this.shiftPressed && !this.capsLocked) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShift;
-      } else if (this.capsPressed && !this.shiftPressed) {
+      } else if (this.capsLocked && !this.shiftPressed) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
-      } else if (this.shiftPressed && this.capsPressed) {
+      } else if (this.shiftPressed && this.capsLocked) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShiftCaps
           || keysMap.get(keyCode)[this.currentLanguage].textCaps;
       } else {
@@ -130,12 +139,12 @@ class Keyboard {
   handleCapsState() {
     this.keys.forEach((key) => {
       const { keyCode } = key.dataset;
-      if (this.capsPressed && !this.shiftPressed) {
+      if (this.capsLocked && !this.shiftPressed) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
-      } else if (!this.capsPressed && !this.shiftPressed) {
+      } else if (!this.capsLocked && !this.shiftPressed) {
         key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
-      } else if (this.shiftPressed && this.capsPressed) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShift;
+      } else if (this.shiftPressed && this.capsLocked) {
+        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShiftCaps;
       }
     });
   }
