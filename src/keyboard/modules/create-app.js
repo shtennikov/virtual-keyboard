@@ -15,7 +15,7 @@ export default function createApp() {
   app.classList.add(classesCSS.APP_CONTAINER);
 
   if (!localStorage.getItem('language')) {
-    localStorage.setItem('language', 'ru');
+    localStorage.setItem('language', 'en');
   }
 
   title = document.createElement('h1');
