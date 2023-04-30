@@ -23,7 +23,6 @@ class Keyboard {
   }
 
   createKeyboard() {
-    const currentLanguage = localStorage.getItem('language');
     const keyboard = document.createElement('div');
     keyboard.classList.add(classesCSS.KEYS_KEYBOARD);
 
@@ -34,7 +33,7 @@ class Keyboard {
       newRow = document.createElement('div');
       newRow.classList.add(classesCSS.KEYBOARD_ROW);
       for (let key = 0; key < keys[row].length; key += 1) {
-        newKey = new Key(keys[row][key]).createKey(currentLanguage);
+        newKey = new Key(keys[row][key]).createKey(this.currentLanguage);
         this.keys.push(newKey);
         newRow.append(newKey);
       }
@@ -54,7 +53,7 @@ class Keyboard {
     return keyboard;
   }
 
-  langChangeHandlerPressDown(event) {
+  changeLanguageKeysDown(event) {
     if (event.code === 'AltLeft') {
       this.altPressed = true;
     }
@@ -72,7 +71,7 @@ class Keyboard {
     }
   }
 
-  langChangeHandlerPressUp(event) {
+  changeLanguageKeysUp(event) {
     if (event.code === 'AltLeft') {
       this.altPressed = false;
     }
@@ -82,7 +81,7 @@ class Keyboard {
     }
   }
 
-  turnUpSymbolsPressDown(event) {
+  changeCaseOfSymbolsKeysDown(event) {
     if (
       event.code === 'ShiftLeft'
       || event.code === 'ShiftRight'
@@ -104,7 +103,7 @@ class Keyboard {
     }
   }
 
-  turnUpSymbolsPressUp(event) {
+  changeCaseOfSymbolsKeysUp(event) {
     if (
       event.code === 'ShiftLeft'
       || event.code === 'ShiftRight'
@@ -211,7 +210,7 @@ class Keyboard {
     }
   }
 
-  putInTextArea(symbol) {
+  insertSymbolAtTextArea(symbol) {
     const startPos = this.textArea.selectionStart;
     const endPos = this.textArea.selectionEnd;
 
@@ -219,7 +218,7 @@ class Keyboard {
     this.textArea.setSelectionRange(startPos + symbol.length, startPos + symbol.length);
   }
 
-  typeTextToTextArea(key) {
+  setTextAtTextarea(key) {
     const posStart = this.textArea.selectionStart;
     const textAreaValue = this.textArea.value;
 
@@ -231,13 +230,13 @@ class Keyboard {
         this.handleDeleteState();
         break;
       case 'Tab':
-        this.putInTextArea('\t');
+        this.insertSymbolAtTextArea('\t');
         break;
       case 'Enter':
-        this.putInTextArea('\n');
+        this.insertSymbolAtTextArea('\n');
         break;
       case 'Space':
-        this.putInTextArea(' ');
+        this.insertSymbolAtTextArea(' ');
         break;
       default:
         if (serviceKeys.includes(key.dataset.keyCode)) {
@@ -262,10 +261,10 @@ class Keyboard {
         event.preventDefault();
       }
       this.pressedKey.classList.add('active');
-      this.typeTextToTextArea(this.pressedKey);
+      this.setTextAtTextarea(this.pressedKey);
     }
-    this.langChangeHandlerPressDown(event);
-    this.turnUpSymbolsPressDown(event);
+    this.changeLanguageKeysDown(event);
+    this.changeCaseOfSymbolsKeysDown(event);
   }
 
   pressUpHandler(event) {
@@ -273,23 +272,23 @@ class Keyboard {
     if (this.pressedKey) {
       this.pressedKey.classList.remove('active');
     }
-    this.langChangeHandlerPressUp(event);
-    this.turnUpSymbolsPressUp(event);
+    this.changeLanguageKeysUp(event);
+    this.changeCaseOfSymbolsKeysUp(event);
   }
 
   clickDownHandler(event) {
     this.clickedKey = event.target;
     if (this.clickedKey.closest('.key')) {
       this.clickedKey.classList.add('active');
-      this.typeTextToTextArea(this.clickedKey.closest('.key'));
-      this.turnUpSymbolsPressDown(event);
+      this.setTextAtTextarea(this.clickedKey.closest('.key'));
+      this.changeCaseOfSymbolsKeysDown(event);
       this.handleClickOnArrows(event);
     }
   }
 
   clickUpHandler(event) {
     this.clickedKey.classList.remove('active');
-    this.turnUpSymbolsPressUp(event);
+    this.changeCaseOfSymbolsKeysUp(event);
   }
 }
 
