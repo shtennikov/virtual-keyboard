@@ -8,7 +8,6 @@ import {
 } from '../../data/keys-data';
 import Key from './Key';
 
-/* eslint-disable no-param-reassign */
 class Keyboard {
   constructor(textArea) {
     this.textArea = textArea;
@@ -66,7 +65,8 @@ class Keyboard {
       localStorage.setItem('language', newLanguage);
       this.keys.forEach((key) => {
         const { keyCode } = key.dataset;
-        key.firstChild.textContent = keysMap.get(keyCode)[newLanguage].text;
+        const keyElement = key;
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[newLanguage].text;
       });
     }
   }
@@ -114,7 +114,8 @@ class Keyboard {
     }
     if (
       event.code === 'CapsLock'
-      || event.target.closest('.key[data-key-code="CapsLock"]')) {
+      || event.target.closest('.key[data-key-code="CapsLock"]')
+    ) {
       this.capsPressed = false;
     }
   }
@@ -122,15 +123,16 @@ class Keyboard {
   handleShiftState() {
     this.keys.forEach((key) => {
       const { keyCode } = key.dataset;
+      const keyElement = key;
       if (this.shiftPressed && !this.capsLocked) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShift;
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShift;
       } else if (this.capsLocked && !this.shiftPressed) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
       } else if (this.shiftPressed && this.capsLocked) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShiftCaps
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShiftCaps
           || keysMap.get(keyCode)[this.currentLanguage].textCaps;
       } else {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
       }
     });
   }
@@ -138,12 +140,15 @@ class Keyboard {
   handleCapsState() {
     this.keys.forEach((key) => {
       const { keyCode } = key.dataset;
+      const keyElement = key;
       if (this.capsLocked && !this.shiftPressed) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textCaps;
       } else if (!this.capsLocked && !this.shiftPressed) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
+        keyElement.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].text;
       } else if (this.shiftPressed && this.capsLocked) {
-        key.firstChild.textContent = keysMap.get(keyCode)[this.currentLanguage].textShiftCaps;
+        keyElement.firstChild.textContent = keysMap
+          .get(keyCode)[this.currentLanguage]
+          .textShiftCaps;
       }
     });
   }
@@ -214,7 +219,10 @@ class Keyboard {
     const startPos = this.textArea.selectionStart;
     const endPos = this.textArea.selectionEnd;
 
-    this.textArea.value = `${this.textArea.value.slice(0, startPos)}${symbol}${this.textArea.value.slice(endPos)}`;
+    this.textArea.value = `${this.textArea.value.slice(
+      0,
+      startPos,
+    )}${symbol}${this.textArea.value.slice(endPos)}`;
     this.textArea.setSelectionRange(startPos + symbol.length, startPos + symbol.length);
   }
 
