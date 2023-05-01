@@ -146,6 +146,23 @@
   display: none;
 }
 
+.caps-light {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.caps-light_off {
+  background-color: #08350a;
+  box-shadow: 0px 1px 13px 2px #08350a;
+}
+.caps-light_on {
+  background-color: #20FF27;
+  box-shadow: 0px 1px 13px 2px #20FF27;
+}
+
 .key[data-key-code=ControlLeft],
 .key[data-key-code=ControlRight] {
   width: 60px;
@@ -156,6 +173,7 @@
 }
 
 .key[data-key-code=CapsLock] {
+  position: relative;
   width: 95px;
 }
 

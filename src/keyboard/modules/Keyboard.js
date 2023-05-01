@@ -12,6 +12,7 @@ class Keyboard {
   constructor(textArea) {
     this.textArea = textArea;
     this.keys = [];
+    this.capsLockIndicator = null;
     this.pressedKey = null;
     this.clickedKey = null;
     this.capsPressed = false;
@@ -27,12 +28,20 @@ class Keyboard {
 
     let newRow = null;
     let newKey = null;
+    let capsLight = null;
 
     for (let row = 0; row < keys.length; row += 1) {
       newRow = document.createElement('div');
       newRow.classList.add(classesCSS.KEYBOARD_ROW);
       for (let key = 0; key < keys[row].length; key += 1) {
         newKey = new Key(keys[row][key]).createKey(this.currentLanguage);
+        // add lamp for caps lock
+        if (newKey.dataset.keyCode === 'CapsLock') {
+          capsLight = document.createElement('div');
+          capsLight.classList.add(classesCSS.CAPS_LIGHT, classesCSS.CAPS_LIGHT_OFF);
+          newKey.append(capsLight);
+          this.capsLockIndicator = capsLight;
+        }
         this.keys.push(newKey);
         newRow.append(newKey);
       }
@@ -98,6 +107,8 @@ class Keyboard {
       if (!this.capsPressed) {
         this.capsLocked = !this.capsLocked;
         this.capsPressed = true;
+        this.capsLockIndicator.classList.toggle(classesCSS.CAPS_LIGHT_OFF);
+        this.capsLockIndicator.classList.toggle(classesCSS.CAPS_LIGHT_ON);
         this.handleCapsState();
       }
     }
