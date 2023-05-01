@@ -613,7 +613,6 @@ const notPreventDefaultKeysInTextArea = [
   'ArrowRight',
   'ArrowDown',
   'ArrowUp',
-  'Delete',
 ];
 
 const classesCSS = {
