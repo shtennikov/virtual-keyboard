@@ -5,7 +5,7 @@ import {
   classesCSS,
   preventDefaultKeys,
   notPreventDefaultKeysInTextArea,
-} from '../../data/keys-data';
+} from '../data/keys-data';
 import Key from './Key';
 
 class Keyboard {

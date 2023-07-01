@@ -1,9 +1,10 @@
-import { classesCSS } from '../../data/keys-data';
+import { classesCSS } from '../data/keys-data';
+
+const TEXT_ALT_IMAGE_CAT = 'bongo cat';
+const TEXT_IMAGE = 'клац';
+const LINK_TO_IMAGE = './assets/images/output-onlinegiftools.gif';
 
 export default function createImages() {
-  const TEXT_ALT_IMAGE_CAT = 'bongo cat';
-  const TEXT_IMAGE = 'клац';
-
   let imageContainer = null;
   let leftImage = null;
   let rightImage = null;
@@ -20,7 +21,7 @@ export default function createImages() {
   leftImage = document.createElement('div');
   imageCat = document.createElement('img');
   imageCat.classList.add(classesCSS.IMAGE_CAT, classesCSS.IMAGE_CAT_LEFT);
-  imageCat.src = '../assets/images/output-onlinegiftools.gif';
+  imageCat.src = LINK_TO_IMAGE;
   imageCat.alt = TEXT_ALT_IMAGE_CAT;
   leftSpanTextTop = document.createElement('span');
   leftSpanTextTop.classList.add(classesCSS.IMAGE_SPAN_TEXT_TOP, classesCSS.IMAGE_SPAN_TEXT_LEFT);
@@ -34,7 +35,7 @@ export default function createImages() {
   rightImage = document.createElement('div');
   imageCat2 = document.createElement('img');
   imageCat2.classList.add(classesCSS.IMAGE_CAT, classesCSS.IMAGE_CAT_RIGHT);
-  imageCat2.src = '../assets/images/output-onlinegiftools.gif';
+  imageCat2.src = LINK_TO_IMAGE;
   imageCat2.alt = TEXT_ALT_IMAGE_CAT;
   rightSpanTextTop = document.createElement('span');
   rightSpanTextTop.classList.add(classesCSS.IMAGE_SPAN_TEXT_TOP, classesCSS.IMAGE_SPAN_TEXT_RIGHT);

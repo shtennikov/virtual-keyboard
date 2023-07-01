@@ -1,6 +1,6 @@
 import Keyboard from './Keyboard';
 import createImages from './create-images';
-import { classesCSS } from '../../data/keys-data';
+import { classesCSS } from '../data/keys-data';
 
 const TEXT_TITLE = 'RSS Virtual Keyboard';
 const TEXT_DESCRIPTION = 'Клавиатура создана в операционной системе Windows';

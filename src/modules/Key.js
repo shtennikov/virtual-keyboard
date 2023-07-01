@@ -1,4 +1,4 @@
-import { classesCSS } from '../../data/keys-data';
+import { classesCSS } from '../data/keys-data';
 
 export default class Key {
   constructor(key) {
